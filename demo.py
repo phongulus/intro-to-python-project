@@ -25,7 +25,7 @@ def update_coords(delta_x, delta_y):
         y + delta_y < 0 or y + delta_y > y_max:
         pass
     else:
-        dot_coordinates = (x, y)
+        dot_coordinates = (x + delta_x, y + delta_y)
 
 while True:
   
