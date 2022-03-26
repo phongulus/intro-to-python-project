@@ -31,13 +31,13 @@ while True:
   
     if controls.is_up_pressed():
         print("up")
-        update_coords(0, 1)
+        update_coords(0, -1)
         send_matrix_data(coor_to_mat(dot_coordinates))
         sleep(0.5)
 
     if controls.is_down_pressed():
         print("down")
-        update_coords(0, -1)
+        update_coords(0, 1)
         send_matrix_data(coor_to_mat(dot_coordinates))
         sleep(0.5)
 
