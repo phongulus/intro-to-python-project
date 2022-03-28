@@ -28,3 +28,4 @@ def send_matrix_data(mat):
                         socket.SOCK_DGRAM) # UDP
     sock.sendto(to_send, (UDP_IP, UDP_PORT))
     sock.sendto(to_send, (UDP_IP, UDP_PORT))
+    sock.sendto(to_send, (UDP_IP, UDP_PORT))
