@@ -24,5 +24,5 @@ while True:
         r, g, b = data[i * 3], data[i * 3 + 1], data[i * 3 + 2]
         unicorn.set_pixel(i % 8, i // 8, r, g, b)
     unicorn.show()
-    print("Updated UnicornHat!")
-    sleep(0.2)
+    # print("Updated UnicornHat!")
+    # sleep(0.2)
