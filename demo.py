@@ -33,25 +33,25 @@ while True:
         print("up")
         update_coords(0, -1)
         send_matrix_data(coor_to_mat(dot_coordinates))
-        sleep(0.5)
+        sleep(0.3)
 
     if controls.is_down_pressed():
         print("down")
         update_coords(0, 1)
         send_matrix_data(coor_to_mat(dot_coordinates))
-        sleep(0.5)
+        sleep(0.3)
 
     if controls.is_left_pressed():
         print("left")
         update_coords(-1, 0)
         send_matrix_data(coor_to_mat(dot_coordinates))
-        sleep(0.5)
+        sleep(0.3)
 
     if controls.is_right_pressed():
         print("right")
         update_coords(1, 0)
         send_matrix_data(coor_to_mat(dot_coordinates))
-        sleep(0.5)
+        sleep(0.3)
 
     if controls.is_center_pressed():
         print("center")
