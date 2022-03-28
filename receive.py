@@ -17,7 +17,7 @@ sock = socket.socket(socket.AF_INET, # Internet
 sock.bind((UDP_IP, UDP_PORT))
 
 while True:
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+    data, addr = sock.recvfrom(192) # buffer size is 1024 bytes
 
     # The data should be 3 * 64 = 192 bytes long
     for i in range(u_width * u_height):
