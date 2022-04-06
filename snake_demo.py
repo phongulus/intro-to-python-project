@@ -1,61 +1,41 @@
 import model.snake as snake_
 import model.food as food_
-from model.util import Direction
+from model.util import Direction, Color
 from time import sleep, time
 from send_unicorn import send_matrix_data
 import controls
 
 # initialize speed
-speed = 0.6
+SPEED = 0.6
 
 # Window size
-window_x = 8
-window_y = 8
+WIDTH = 8
+HEIGHT = 8
 
 # defining colors
-black = (0, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
-red = (255, 0, 0)
+BLANK = Color(0, 0, 0)
 
-def get_blank_matrix():
-    mat = [0] * 8
-    for y in range(8):
+def reset_matrix():
+    matrix = [0] * 8
+    for y in range(HEIGHT):
         row = []
-        for x in range(8):
-            row.append(black)
-        mat[y] = row
-    return mat
-
-# def game_over():
-#     pygame.display.flip()
-#     pygame.quit()
-#     quit()
+        for x in range(WIDTH):
+            row.append(BLANK)
+        matrix[y] = row
+    return matrix
 
 
 # Main Function
 
-snake = snake_.Snake(window_x, window_y)
-food = food_.Food(window_x, window_y)
+snake = snake_.Snake(WIDTH, HEIGHT)
+food = food_.Food(WIDTH, HEIGHT)
+
 is_running = True
 cur_time = time()
 last_event = None
 
 while is_running:
     
-    # for event in pygame.event.get():
-    #     if event.type == pygame.KEYDOWN:
-    #         if event.key == pygame.K_UP:
-    #             snake.turn(Direction.UP)
-    #         if event.key == pygame.K_DOWN:
-    #             snake.turn(Direction.DOWN)
-    #         if event.key == pygame.K_LEFT:
-    #             snake.turn(Direction.LEFT)
-    #         if event.key == pygame.K_RIGHT:
-    #             snake.turn(Direction.RIGHT)
-    #         if event.key == pygame.K_1:
-    #             is_running = False
-
     if controls.is_up_pressed():
         last_event = Direction.UP
 
@@ -68,33 +48,26 @@ while is_running:
     if controls.is_right_pressed():
         last_event = Direction.RIGHT
 
-    if cur_time + speed <= time():
+    if cur_time + SPEED <= time():
 
         snake_head = snake.get_head_position()
-
-        # Reset the game if snake is outside of window
-        if (snake_head.x >= window_x or snake_head.x < 0 or
-            snake_head.y >= window_y or snake_head.y < 0): 
-            snake = snake_.Snake(window_x, window_y)
-            food = food_.Food(window_x, window_y)
 
         if last_event:
             snake.turn(last_event)
 
-        collision = snake.get_head_position() == food.position
-        grow = False
+        grow = snake.get_head_position() == food.position
 
-        if collision:
-            grow = True
+        if grow:
             food.move_random_position(snake_pos=snake.positions)
 
-        snake.move(grow=grow)
+        if not snake.move(grow=grow):
+            snake.reset()
+            food.reset()
 
-        mat = get_blank_matrix()
-        mat[food.position.y][food.position.x] = red
+        mat = reset_matrix()
+        mat[food.position.y][food.position.x] = food.color
         for curr in snake.positions:
-            if 0 <= curr.y and curr.y <= 7 and 0 <= curr.x and curr.x <= 7:
-                mat[curr.y][curr.x] = green
+                mat[curr.y][curr.x] = snake.color
 
         send_matrix_data(mat)
 

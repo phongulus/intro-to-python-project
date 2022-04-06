@@ -17,5 +17,8 @@ class Food:
         # Todo: food cannot appear within the snake body
         self.position = random.choice(self.all_points)
 
+    def reset(self):
+        self.position = Point(1, 1)
+
     def draw(self):
         pass
