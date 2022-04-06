@@ -93,7 +93,8 @@ while is_running:
         mat = get_blank_matrix()
         mat[food.position.y][food.position.x] = red
         for curr in snake.positions:
-            mat[curr.y][curr.x] = green
+            if 0 <= curr.y and curr.y <= 7 and 0 <= curr.x and curr.x <= 7:
+                mat[curr.y][curr.x] = green
 
         send_matrix_data(mat)
 
