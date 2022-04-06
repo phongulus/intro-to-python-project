@@ -1,4 +1,5 @@
 from collections import deque
+from xmlrpc.client import Boolean
 from model.util import Point, Color
 import random
 
@@ -28,7 +29,7 @@ class Food:
             for y in range(height):
                 self.all_points.add(Point(x, y))
 
-    def move_random_position(self, snake_pos: deque[Point]) -> None:
+    def move_random_position(self, snake_pos: deque[Point]) -> Boolean:
         """
         Moves the food to a random position that is not it's old position
         and not in the snake
@@ -36,6 +37,10 @@ class Food:
         Paramters:
         ----
         snake_pos<deque>: snake points
+
+        Return:
+        ----
+        <Boolean>: Returns True if there are points left and False if not
         """
         # Todo: food cannot appear within the snake body
         set_snake_pos = set(snake_pos)
@@ -43,7 +48,7 @@ class Food:
         difference = self.all_points - set_snake_pos
         self.position = random.choice(difference)
 
-        return len(difference) != 0  
+        return len(difference) != 0
 
     def draw(self):
         pass
