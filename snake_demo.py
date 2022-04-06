@@ -48,7 +48,7 @@ while is_running:
     if controls.is_right_pressed():
         last_event = Direction.RIGHT
 
-    if cur_time + speed <= time():
+    if cur_time + SPEED <= time():
 
         snake_head = snake.get_head_position()
 
