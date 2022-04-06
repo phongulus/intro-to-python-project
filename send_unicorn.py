@@ -57,3 +57,31 @@ def send_matrix_data(mat: list[list[tuple[int, int, int]]]) -> None:
     sock.sendto(to_send, (UDP_IP, UDP_PORT))
 
     return None
+
+
+def bytes_to_matrix(data: bytes,
+                    width: int,
+                    height: int) -> list[list[tuple[int, int, int]]]:
+    """
+    Convert a sequence of bytes to an (r, g, b) matrix.
+
+    Parameters:
+    ----
+    `data <bytes>`: The sequence of bytes, of length rows * columns.
+
+    Return:
+    ----
+    `mat <list[list[tuple[int, int, int]]]>`: The rows * columns matrix
+    where each element is a tuple representing the color of a pixel via
+    RGB code in a tuple `(r, g, b)`.
+    """
+
+    mat = []
+    row = []
+    for i in range(width * height):
+        r, g, b = data[i * 3], data[i * 3 + 1], data[i * 3 + 2]
+        row.append((r, g, b))
+        if (i + 1) % width == 0:
+            mat.append(row)
+            row = []
+    return mat
