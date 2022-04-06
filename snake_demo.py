@@ -1,5 +1,5 @@
-import model.snake as snake
-import model.food as food
+import model.snake as snake_
+import model.food as food_
 from model.util import Direction
 from time import time
 from send_unicorn import send_matrix_data
@@ -35,8 +35,8 @@ def get_blank_matrix():
 
 # Main Function
 
-snake = snake.Snake(window_x, window_y)
-food = food.Food(window_x, window_y)
+snake = snake_.Snake(window_x, window_y)
+food = food_.Food(window_x, window_y)
 is_running = True
 cur_time = time()
 last_event = None
@@ -48,8 +48,8 @@ while is_running:
     # Reset the game if snake is outside of window
     if (snake_head.x >= window_x or snake_head.x <= 0 or
         snake_head.y >= window_y or snake_head.y <= 0): 
-        snake = snake.Snake(window_x, window_y)
-        food = food.Food(window_x, window_y)
+        snake = snake_.Snake(window_x, window_y)
+        food = food_.Food(window_x, window_y)
     
     # for event in pygame.event.get():
     #     if event.type == pygame.KEYDOWN:
