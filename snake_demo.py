@@ -42,14 +42,6 @@ cur_time = time()
 last_event = None
 
 while is_running:
-
-    snake_head = snake.get_head_position()
-
-    # Reset the game if snake is outside of window
-    if (snake_head.x >= window_x or snake_head.x <= 0 or
-        snake_head.y >= window_y or snake_head.y <= 0): 
-        snake = snake_.Snake(window_x, window_y)
-        food = food_.Food(window_x, window_y)
     
     # for event in pygame.event.get():
     #     if event.type == pygame.KEYDOWN:
@@ -77,6 +69,14 @@ while is_running:
         last_event = Direction.RIGHT
 
     if cur_time + speed >= time():
+
+        snake_head = snake.get_head_position()
+
+        # Reset the game if snake is outside of window
+        if (snake_head.x >= window_x or snake_head.x <= 0 or
+            snake_head.y >= window_y or snake_head.y <= 0): 
+            snake = snake_.Snake(window_x, window_y)
+            food = food_.Food(window_x, window_y)
 
         if last_event:
             snake.turn(last_event)
