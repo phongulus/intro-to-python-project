@@ -1,7 +1,7 @@
 import model.snake as snake_
 import model.food as food_
 from model.util import Direction
-from time import time
+from time import sleep, time
 from send_unicorn import send_matrix_data
 import controls
 
@@ -100,3 +100,4 @@ while is_running:
 
         cur_time = time()
         last_event = None
+        sleep(3)
