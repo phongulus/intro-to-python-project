@@ -60,7 +60,7 @@ while is_running:
         if grow:
             food.move_random_position(snake_pos=snake.positions)
 
-        if not snake.move(grow=grow):
+        if not snake.move(grow=grow):  # Move is invalid
             snake.reset()
             food.reset()
 
