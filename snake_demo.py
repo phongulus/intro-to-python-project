@@ -6,7 +6,7 @@ from send_unicorn import send_matrix_data
 import controls
 
 # initialize speed
-speed = 0.5
+speed = 1
 
 # Window size
 window_x = 8
