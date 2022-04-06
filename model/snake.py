@@ -55,7 +55,7 @@ class Snake:
         self.length = 1
         self.direction = Direction.RIGHT
 
-        mid_point = Point(self.width // 2, self.height // 2)
+        mid_point = Point(self.screen_width // 2, self.screen_height // 2)
         self.positions = deque([mid_point])
 
     def draw(self) -> None:
