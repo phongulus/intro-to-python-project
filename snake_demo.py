@@ -15,7 +15,7 @@ HEIGHT = 8
 # defining colors
 BLANK = Color(0, 0, 0)
 
-def reset_matrix(matrix):
+def reset_matrix():
     matrix = [0] * 8
     for y in range(HEIGHT):
         row = []
