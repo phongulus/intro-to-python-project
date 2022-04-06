@@ -23,9 +23,9 @@ def matrix_to_bytes(mat: list[list[tuple[int, int, int]]]) -> bytes:
     data = b''
     for y in mat:
         for x in y:
-            to_send += x[0].to_bytes(1, 'little')
-            to_send += x[1].to_bytes(1, 'little')
-            to_send += x[2].to_bytes(1, 'little')
+            data += x[0].to_bytes(1, 'little')
+            data += x[1].to_bytes(1, 'little')
+            data += x[2].to_bytes(1, 'little')
     return data
 
 
