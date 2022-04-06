@@ -6,7 +6,7 @@ from send_unicorn import send_matrix_data
 import controls
 
 # initialize speed
-speed = 0.75
+speed = 0.6
 
 # Window size
 window_x = 8
@@ -73,8 +73,8 @@ while is_running:
         snake_head = snake.get_head_position()
 
         # Reset the game if snake is outside of window
-        if (snake_head.x >= window_x or snake_head.x <= 0 or
-            snake_head.y >= window_y or snake_head.y <= 0): 
+        if (snake_head.x > window_x or snake_head.x < 0 or
+            snake_head.y > window_y or snake_head.y < 0): 
             snake = snake_.Snake(window_x, window_y)
             food = food_.Food(window_x, window_y)
 
