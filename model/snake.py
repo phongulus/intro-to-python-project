@@ -1,5 +1,5 @@
 from collections import deque
-from util import Direction, Point, Color, Pixel
+from model.util import Direction, Point, Color, Pixel
 
 
 class Snake:

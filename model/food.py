@@ -1,5 +1,5 @@
 from collections import deque
-from util import Point, Color
+from model.util import Point, Color
 import random
 
 
