@@ -23,10 +23,10 @@ class Food:
         self.color: Color = Color(255, 0, 0)  # Red
         self.position: Point = Point(1, 1)  # TODO: Randomize this
 
-        self.all_points: list(Point) = []
+        self.all_points: set(Point) = set()
         for x in range(width):
             for y in range(height):
-                self.all_points.append(Point(x, y))
+                self.all_points.add(Point(x, y))
 
     def move_random_position(self, snake_pos: deque[Point]) -> None:
         """
@@ -38,7 +38,12 @@ class Food:
         snake_pos<deque>: snake points
         """
         # Todo: food cannot appear within the snake body
-        self.position = random.choice(self.all_points)
+        set_snake_pos = set(snake_pos)
+
+        difference = self.all_points - set_snake_pos
+        self.position = random.choice(difference)
+
+        return len(difference) != 0  
 
     def draw(self):
         pass
