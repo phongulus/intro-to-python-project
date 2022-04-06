@@ -1,7 +1,7 @@
 import pygame
 import snake
 import food
-from util import Direction
+from model.util import Direction
 
 # initialize speed
 speed = 2
@@ -40,10 +40,10 @@ while is_running:
 
     snake_head = snake.get_head_position()
 
-    if snake_head.x >= window_x or snake_head.x <= 0: 
-        game_over()
-    elif snake_head.y >= window_y or snake_head.y <= 0:
-        game_over()
+    # if snake_head.x >= window_x or snake_head.x <= 0: 
+    #     game_over()
+    # elif snake_head.y >= window_y or snake_head.y <= 0:
+    #     game_over()
     
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -65,7 +65,8 @@ while is_running:
         grow = True
         food.move_random_position(snake_pos=snake.positions)
 
-    snake.move(grow=grow)
+    if not snake.move(grow=grow):
+        game_over()
 
     window.fill(black)
 
