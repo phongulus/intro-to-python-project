@@ -64,7 +64,7 @@ while is_running:
             snake.reset()
             food.reset()
 
-        mat = reset_matrix(mat)
+        mat = reset_matrix()
         mat[food.position.y][food.position.x] = food.color()
         for curr in snake.positions:
                 mat[curr.y][curr.x] = snake.color
