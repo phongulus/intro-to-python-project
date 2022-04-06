@@ -52,11 +52,11 @@ class Snake:
         return valid_move
 
     def reset(self) -> None:
-        self.length: int = 1
-        self.direction: Direction = Direction.RIGHT
+        self.length = 1
+        self.direction = Direction.RIGHT
 
         mid_point = Point(width // 2, height // 2)
-        self.positions: deque[Point] = deque([mid_point])
+        self.positions = deque([mid_point])
 
     def draw(self) -> None:
         pass
