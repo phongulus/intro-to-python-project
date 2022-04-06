@@ -6,7 +6,7 @@ from send_unicorn import send_matrix_data
 import controls
 
 # initialize speed
-speed = 5
+speed = 1
 
 # Window size
 window_x = 8
@@ -68,7 +68,7 @@ while is_running:
     if controls.is_right_pressed():
         last_event = Direction.RIGHT
 
-    if cur_time + speed >= time():
+    if cur_time + speed <= time():
 
         snake_head = snake.get_head_position()
 
@@ -100,4 +100,3 @@ while is_running:
 
         cur_time = time()
         last_event = None
-        sleep(3)
