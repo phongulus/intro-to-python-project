@@ -1,0 +1,32 @@
+coords
+direction
+
+game
+- is_running()
+- speed attr
+- points attr
+
+
+grid obj
+8x8 list of list
+
+apple_coords attr
+- get_free_squares()
+- is_out()
+
+
+
+snake_head:
+
+curr_dir
+
+- turn(dir)
+
+
+
+snake_body:
+
+-
+
+prev_coord
+curr_coord
