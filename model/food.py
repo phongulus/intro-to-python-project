@@ -46,7 +46,7 @@ class Food:
         set_snake_pos = set(snake_pos)
 
         difference = self.all_points - set_snake_pos
-        self.position = random.choice(difference)
+        self.position = random.choice(list(difference))
 
         return len(difference) != 0
 
