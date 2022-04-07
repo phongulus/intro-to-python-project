@@ -1,13 +1,13 @@
-import model.snake as snake_
-import model.food as food_
+from model.snake import Snake
+from model.food import Food
 from model.util import Color
 
 
 class Game:
 
     def __init__(self, width: int, height: int):
-        self.snake = snake_.Snake(width, height)
-        self.food = food_.Food(width, height)
+        self.snake = Snake(width, height)
+        self.food = Food(width, height)
         self.width = width
         self.height = height
 
