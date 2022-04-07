@@ -4,6 +4,7 @@ import socket
 UDP_IP = "192.168.43.200"
 UDP_PORT = 9000
 
+
 def matrix_to_bytes(mat: list[list[tuple[int, int, int]]]) -> bytes:
     """
     Convert an (r, g, b) matrix to a sequence of bytes that can be
@@ -47,8 +48,8 @@ def send_matrix_data(mat: list[list[tuple[int, int, int]]]) -> None:
     """
 
     to_send = matrix_to_bytes(mat)
-    sock = socket.socket(socket.AF_INET, # Internet
-                        socket.SOCK_DGRAM) # UDP
+    sock = socket.socket(socket.AF_INET,  # Internet
+                         socket.SOCK_DGRAM)  # UDP
 
     # Send matrix data three times to make sure that the LED matrix
     # Raspberry Pi receives it.

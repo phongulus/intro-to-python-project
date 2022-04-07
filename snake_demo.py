@@ -20,7 +20,7 @@ last_event = None
 
 # Main loop
 while True:
-    
+
     # Even when the game is waiting for the next frame,
     # take and remember inputs from the player.
     if controls.is_up_pressed():

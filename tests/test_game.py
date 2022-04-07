@@ -5,6 +5,7 @@ from model.game import Game
 from model.snake import Snake
 from model.food import Food
 
+
 class GameTestCase(TestCase):
 
     def test_game_init(self):
@@ -44,8 +45,7 @@ class GameTestCase(TestCase):
         game.update_game(Direction.LEFT)
         game.update_game(None)
         assert game.snake.length == 1
-        game.update_game(None) # Snake length and new food position
-                                # should be updated here
+        game.update_game(None)
         assert game.snake.length == 2
         assert game.snake.get_head_position() == Point(0, 1)
         assert game.food.position != Point(1, 1)
