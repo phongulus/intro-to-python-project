@@ -6,6 +6,12 @@ class Point(NamedTuple):
     x: int
     y: int
 
+    def __add__(self, p):
+        if type(p) != Point:
+            return Exception("You can only add Point objects together")
+
+        return Point(self.x + p.x, self.y + p.y)
+
 
 class Color(NamedTuple):
     Red: int
