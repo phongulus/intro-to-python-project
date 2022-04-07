@@ -1,6 +1,6 @@
 from time import sleep
 import controls
-from send_unicorn import send_matrix_data
+from unicorn import send_matrix_data
 
 dot_coordinates = (3, 3)
 x_max = 6

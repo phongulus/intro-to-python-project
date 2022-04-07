@@ -1,7 +1,7 @@
 from model.util import Direction
 from model.game import Game
 from time import time
-from send_unicorn import send_matrix_data
+from unicorn import send_matrix_data
 import controls
 
 # Initialize speed
