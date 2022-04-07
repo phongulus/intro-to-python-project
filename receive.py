@@ -1,7 +1,7 @@
 import socket
 from time import sleep
 import unicornhat
-from unicorn import bytes_to_matrix
+from pi.unicorn import bytes_to_matrix
 
 # IP address and port of the receiving RPi
 UDP_IP = "192.168.43.200"
