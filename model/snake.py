@@ -26,22 +26,17 @@ class Snake:
     def move(self, grow: bool = False) -> bool:
         self.length += grow
         curr = self.get_head_position()
-        new_x = curr.x + self.direction.value.x
-        new_y = curr.y + self.direction.value.y
+        new = curr + self.direction.value
 
-        if new_x > self.screen_width - 1: 
-            new_x = 0
+        if new.x > self.screen_width - 1:
+            new = Point(0, new.y)
+        elif new.y > self.screen_height - 1:
+            new = Point(new.x, 0)
+        elif new.x < 0:
+            new = Point(self.screen_width - 1, new.y)
+        elif new.y < 0: 
+            new = Point(new.x, self.screen_height - 1)
 
-        if new_y > self.screen_height - 1: 
-            new_y = 0
-
-        if new_x < 0: 
-            new_x = self.screen_width - 1
-        
-        if new_y < 0: 
-            new_y = self.screen_height - 1
-
-        new = Point(new_x, new_y)
         valid_move = new not in self.positions
 
         self.positions.appendleft(new)
@@ -57,6 +52,3 @@ class Snake:
 
         mid_point = Point(self.screen_width // 2, self.screen_height // 2)
         self.positions = deque([mid_point])
-
-    def draw(self) -> None:
-        pass

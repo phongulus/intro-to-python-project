@@ -1,5 +1,4 @@
 from collections import deque
-from xmlrpc.client import Boolean
 from model.util import Point, Color
 import random
 
@@ -12,29 +11,32 @@ class Food:
 
         Parameters:
         ----
-        width<int>: width of grid
-        height<int>: height of grid
+        width<int>: width of grid.
+        height<int>: height of grid.
 
         Attributes:
         ----
-        color<Color>: RGB value of food (Red)
-        position<Point>: Position of food
-        all_points<list(Point)>: List of points of all points in the grid
+        color<Color>: RGB color value of food (Red).
+        position<Point>: Position of food.
+        all_points<set(Point)>: Set of all points in the grid.
         """
-        self.color: Color = Color(255, 0, 0)  # Red
-        self.position: Point = Point(1, 1)  # TODO: Randomize this
 
+        self.color: Color = Color(255, 0, 0)  # Red
+        self.position: Point = Point(1, 1)
+
+        # Get the set of all possible food placement positions.
+        # This is useful for move_random_position later.
         self.all_points: set(Point) = set()
         for x in range(width):
             for y in range(height):
                 self.all_points.add(Point(x, y))
 
-    def move_random_position(self, snake_pos: deque[Point]) -> Boolean:
+    def move_random_position(self, snake_pos: deque[Point]) -> bool:
         """
-        Moves the food to a random position that is not it's old position
-        and not in the snake
+        Moves the food to a random position that is not its old position
+        and not in the snake.
 
-        Paramters:
+        Parameters:
         ----
         snake_pos<deque>: snake points
 
@@ -42,16 +44,25 @@ class Food:
         ----
         <Boolean>: Returns True if there are points left and False if not
         """
-        # Todo: food cannot appear within the snake body
-        set_snake_pos = set(snake_pos)
 
-        difference = self.all_points - set_snake_pos
-        self.position = random.choice(list(difference))
-
-        return len(difference) != 0
+        difference = self.all_points - set(snake_pos) - set([self.position])
+        try:
+            self.position = random.choice(list(difference))
+        except IndexError:
+            return False
+        return True
 
     def reset(self):
-        self.position = Point(1, 1)
+        """
+        Reset the food position to its default position.
 
-    def draw(self):
-        pass
+        Parameters:
+        ----
+        None
+
+        Return:
+        ----
+        None
+        """
+
+        self.position = Point(1, 1)
