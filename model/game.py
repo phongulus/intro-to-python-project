@@ -1,84 +1,40 @@
-import pygame
-import snake
-import food
-from model.util import Direction
-
-# initialize speed
-speed = 2
-clock = pygame.time.Clock()
-
-# Window size
-window_x = 8
-window_y = 8
-
-# defining colors
-black = pygame.Color(0, 0, 0)
-green = pygame.Color(0, 255, 0)
-blue = pygame.Color(0, 0, 255)
-red = pygame.Color(255, 0, 0)
+import model.snake as snake_
+import model.food as food_
+from model.util import Color
 
 
-def game_over():
-    pygame.display.flip()
-    pygame.quit()
-    quit()
+class Game:
 
+    def __init__(self, width: int, height: int):
+        self.snake = snake_.Snake(width, height)
+        self.food = food_.Food(width, height)
+        self.width = width
+        self.height = height
 
-# Main Function
-# Initialising pygame
-pygame.init()
+    def update_game(self, last_event) -> None:
 
-# Initialise game window
-window = pygame.display.set_mode((window_x*100, window_y*100))
+        if last_event:
+            self.snake.turn(last_event)
 
-snake = snake.Snake(window_x, window_y)
-food = food.Food(window_x, window_y)
+        grow = self.snake.get_head_position() == self.food.position
 
-is_running = True
+        if grow:
+            self.food.move_random_position(snake_pos=self.snake.positions)
 
-while is_running:
+        if not self.snake.move(grow=grow):
+            self.snake.reset()
+            self.food.reset()
 
-    snake_head = snake.get_head_position()
+    def get_matrix(self) -> list[list[tuple[int, int, int]]]:
+        
+        # Make a blank width * height matrix.
+        mat = []
+        for _ in range(self.height):
+            mat.append([Color(0, 0, 0) for _ in range(self.width)])
 
-    # if snake_head.x >= window_x or snake_head.x <= 0: 
-    #     game_over()
-    # elif snake_head.y >= window_y or snake_head.y <= 0:
-    #     game_over()
-    
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                snake.turn(Direction.UP)
-            if event.key == pygame.K_DOWN:
-                snake.turn(Direction.DOWN)
-            if event.key == pygame.K_LEFT:
-                snake.turn(Direction.LEFT)
-            if event.key == pygame.K_RIGHT:
-                snake.turn(Direction.RIGHT)
-            if event.key == pygame.K_1:
-                is_running = False
+        # Update matrix with Food and Snake positions.
+        mat[self.food.position.y][self.food.position.x] = self.food.color
+        for curr in self.snake.positions:
+            mat[curr.y][curr.x] = self.snake.color
 
-    collision = snake.get_head_position() == food.position
-    grow = False
-
-    if collision:
-        grow = True
-        food.move_random_position(snake_pos=snake.positions)
-
-    if not snake.move(grow=grow):
-        game_over()
-
-    window.fill(black)
-
-    pygame.draw.rect(
-        window, red, pygame.Rect(
-            food.position.x*100, food.position.y*100, 100, 100))
-
-    for curr in snake.positions:
-        pygame.draw.rect(
-            window, green, pygame.Rect(
-                curr.x*100, curr.y*100, 100, 100))
-
-    # clock ticker
-    pygame.display.update()
-    clock.tick(speed)
+        return mat
