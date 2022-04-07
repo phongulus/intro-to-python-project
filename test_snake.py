@@ -95,15 +95,15 @@ class SnakeTestCase(TestCase):
         assert s.get_head_position() == prev_head + Direction.UP.value
 
     def test_rest(self):
-    	s = Snake(8, 8)
-    	s.length = 12
-    	s.direction = Direction.DOWN
-    	test_snake = deque([Point(1, 1), Point(1, 2), Point(1, 3)])
-    	s.positions = test_snake
+        s = Snake(8, 8)
+        s.length = 12
+        s.direction = Direction.DOWN
+        test_snake = deque([Point(1, 1), Point(1, 2), Point(1, 3)])
+        s.positions = test_snake
 
-    	new_s = Snake(8, 8)
+        new_s = Snake(8, 8)
 
-    	s.reset()
-    	assert s.length == new_s.length
-    	assert s.direction == new_s.direction
-    	assert s.positions == new_s.positions
+        s.reset()
+        assert s.length == new_s.length
+        assert s.direction == new_s.direction
+        assert s.positions == new_s.positions
