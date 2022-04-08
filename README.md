@@ -30,7 +30,7 @@ Both RPi's must be set up in the following way:
 
 - I2C must be enabled.
 - Connect the two RPi's to the same network, either via WiFi or Ethernet.
-- A static IP address for both RPi's must be set up. We followed the instructions here: https://pimylifeup.com/raspberry-pi-static-ip-address/. The chosen IP addresses are `192.168.43.200` for the receiver RPi (the one with the UnicornHat) and `192.168.43.199` for the controller RPi. If other static addresses are used, `send_unicorn.py` and `receive.py` must be updated accordingly.
+- A static IP address for both RPi's must be set up. We followed the instructions here: https://pimylifeup.com/raspberry-pi-static-ip-address/. The chosen IP addresses are `192.168.43.200` for the receiver RPi (the one with the UnicornHat) and `192.168.43.199` for the controller RPi. If other static addresses are used, `unicorn.py` and `receive.py` must be updated accordingly.
 - Make sure that Python 3.9 is installed on the RPi's, and run `pip3 install -r requirements.txt` from the project root directory.
 
 ## Running the game
