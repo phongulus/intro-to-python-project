@@ -3,6 +3,8 @@
 A game of snake played on Raspberry Pi Zero's!
 (This project was made for YSC2221 Introduction to Python)
 
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/70936859/162477682-a27cdc2b-f1f8-4c79-89dc-e5619e063397.png">
+
 ## Components used
 
 - Two Raspberry Pi Zero's (RPi's for short).
