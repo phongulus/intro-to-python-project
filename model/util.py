@@ -12,6 +12,12 @@ class Point(NamedTuple):
 
         return Point(self.x + p.x, self.y + p.y)
 
+    def __mul__(self, p):
+        if type(p) != Point:
+            return Exception("You can only multiply Point objects together")
+
+        return Point(self.x * p.x, self.y * p.y)
+
 
 class Color(NamedTuple):
     Red: int

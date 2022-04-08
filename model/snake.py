@@ -4,6 +4,25 @@ from model.util import Direction, Point, Color
 
 class Snake:
     def __init__(self, width: int, height: int):
+        """
+        Initializes the snake object and sets its attributes
+        of screen_height and screen width
+
+        Parameters:
+        ----
+        width<int>: width of grid.
+        height<int>: height of grid.
+
+        Attributes:
+        ----
+        screen_width<int>: width of grid
+        screen_height<int>:  height of grid
+        length<int>: length of snake
+        color<Color>: color of the snake
+        direction<Direction>: current direction the snake is moving
+        positions<deque[Point]>: deque of points the snake is occupying
+
+        """
         self.screen_width = width
         self.screen_height = height
 
@@ -15,16 +34,61 @@ class Snake:
         self.positions: deque[Point] = deque([mid_point])
 
     def get_head_position(self) -> Point:
+        """
+        Returns the position of the snake's head
+
+        Parameters:
+        ----
+        None
+
+        Return:
+        ----
+        <Point>: Point object representing the snake head's current position
+
+        """
+
         return self.positions[0]
 
     def turn(self, new_direction: Direction) -> None:
-        opposite = Point(new_direction.value.x * -1,
-                         new_direction.value.y * -1)
+        """
+        Sets the snake's direction to the new direction as long
+        as the new direction isn't in the exact opposite direction
+        to it's current direction.
+
+        Parameters:
+        ----
+        new_direction<Direction>: the direction the snake is supposed to turn
+
+        Return:
+        ----
+        None
+
+        """
+
+        opposite = Point(-1, -1) * new_direction.value
 
         if self.length == 1 or opposite != self.direction.value:
             self.direction = new_direction
 
     def move(self, grow: bool = False) -> bool:
+        """
+        Moves the snake one grid unit in the direction it is facing. Will also
+        make the snake grow if the grow param is set to True.
+        It will also return a boolean value that expresses if the move was
+        valid.
+
+        Parameters:
+        ----
+        grow<bool>: if the snake is to grow on this move
+
+        Return:
+        ----
+        <bool>: If the new position of the snake's head is valid.
+        Only currently invalid if the snake's head collides with
+        the rest of the snake's body.
+
+        """
+
         self.length += grow
         curr = self.get_head_position()
         new = curr + self.direction.value
@@ -48,6 +112,20 @@ class Snake:
         return valid_move
 
     def reset(self) -> None:
+        """
+        Resets the snake's length, direction, and positions
+        attributes to default values
+
+        Parameters:
+        ----
+        None
+
+        Return:
+        ----
+        None
+
+        """
+
         self.length = 1
         self.direction = Direction.RIGHT
 
