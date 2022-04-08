@@ -1,5 +1,5 @@
 from collections import deque
-from model.util import Direction, Point, Color, Pixel
+from model.util import Direction, Point, Color
 
 
 class Snake:
@@ -18,7 +18,8 @@ class Snake:
         return self.positions[0]
 
     def turn(self, new_direction: Direction) -> None:
-        opposite = Point(new_direction.value.x * -1, new_direction.value.y * -1)
+        opposite = Point(new_direction.value.x * -1,
+                         new_direction.value.y * -1)
 
         if self.length == 1 or opposite != self.direction.value:
             self.direction = new_direction
@@ -34,7 +35,7 @@ class Snake:
             new = Point(new.x, 0)
         elif new.x < 0:
             new = Point(self.screen_width - 1, new.y)
-        elif new.y < 0: 
+        elif new.y < 0:
             new = Point(new.x, self.screen_height - 1)
 
         valid_move = new not in self.positions

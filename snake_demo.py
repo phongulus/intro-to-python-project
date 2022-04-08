@@ -1,8 +1,8 @@
 from model.util import Direction
 from model.game import Game
 from time import time
-from send_unicorn import send_matrix_data
-import controls
+from pi.unicorn import send_matrix_data
+import pi.controls as controls
 
 # Initialize speed
 SPEED = 0.6
@@ -20,7 +20,7 @@ last_event = None
 
 # Main loop
 while True:
-    
+
     # Even when the game is waiting for the next frame,
     # take and remember inputs from the player.
     if controls.is_up_pressed():
