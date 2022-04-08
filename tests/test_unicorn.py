@@ -1,5 +1,5 @@
 from unittest import TestCase
-from send_unicorn import matrix_to_bytes, bytes_to_matrix
+from pi.unicorn import matrix_to_bytes, bytes_to_matrix
 from random import randint, randbytes
 
 

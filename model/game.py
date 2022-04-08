@@ -1,84 +1,84 @@
-import pygame
-import snake
-import food
-from model.util import Direction
-
-# initialize speed
-speed = 2
-clock = pygame.time.Clock()
-
-# Window size
-window_x = 8
-window_y = 8
-
-# defining colors
-black = pygame.Color(0, 0, 0)
-green = pygame.Color(0, 255, 0)
-blue = pygame.Color(0, 0, 255)
-red = pygame.Color(255, 0, 0)
+from model.snake import Snake
+from model.food import Food
+from model.util import Color
 
 
-def game_over():
-    pygame.display.flip()
-    pygame.quit()
-    quit()
+class Game:
 
+    def __init__(self, width: int, height: int):
+        """
+        Initializes the Game object and sets its attributes
+        width and height. Also creates a Snake object and a
+        Food object.
 
-# Main Function
-# Initialising pygame
-pygame.init()
+        Parameters:
+        ----
+        width<int>: width of grid.
+        height<int>: height of grid.
 
-# Initialise game window
-window = pygame.display.set_mode((window_x*100, window_y*100))
+        Attributes:
+        ----
+        width<int: width of grid.
+        height<int>: height of grid.
+        snake<Snake>: Snake object to keep track of snake length and position.
+        food<Food>: Food object to keep track of food position.
+        """
 
-snake = snake.Snake(window_x, window_y)
-food = food.Food(window_x, window_y)
+        self.snake = Snake(width, height)
+        self.food = Food(width, height)
+        self.width = width
+        self.height = height
 
-is_running = True
+    def update_game(self, last_event) -> None:
+        """
+        Update the game state (Snake and Food) based on player input
+        (or lack thereof).
 
-while is_running:
+        Parameters:
+        ----
+        last_event<Any>: type None, when there are no inputs events to
+        process. Type Direction, when there is player input.
 
-    snake_head = snake.get_head_position()
+        Return:
+        ----
+        None; game state is modified in-place.
+        """
 
-    # if snake_head.x >= window_x or snake_head.x <= 0: 
-    #     game_over()
-    # elif snake_head.y >= window_y or snake_head.y <= 0:
-    #     game_over()
-    
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                snake.turn(Direction.UP)
-            if event.key == pygame.K_DOWN:
-                snake.turn(Direction.DOWN)
-            if event.key == pygame.K_LEFT:
-                snake.turn(Direction.LEFT)
-            if event.key == pygame.K_RIGHT:
-                snake.turn(Direction.RIGHT)
-            if event.key == pygame.K_1:
-                is_running = False
+        if last_event:
+            self.snake.turn(last_event)
 
-    collision = snake.get_head_position() == food.position
-    grow = False
+        grow = self.snake.get_head_position() == self.food.position
 
-    if collision:
-        grow = True
-        food.move_random_position(snake_pos=snake.positions)
+        if grow:
+            self.food.move_random_position(snake_pos=self.snake.positions)
 
-    if not snake.move(grow=grow):
-        game_over()
+        if not self.snake.move(grow=grow):
+            self.snake.reset()
+            self.food.reset()
 
-    window.fill(black)
+    def get_matrix(self) -> list[list[tuple[int, int, int]]]:
+        """
+        Get the current game state as a matrix for display on the LED matrix.
 
-    pygame.draw.rect(
-        window, red, pygame.Rect(
-            food.position.x*100, food.position.y*100, 100, 100))
+        Parameters:
+        ----
+        None
 
-    for curr in snake.positions:
-        pygame.draw.rect(
-            window, green, pygame.Rect(
-                curr.x*100, curr.y*100, 100, 100))
+        Return:
+        ----
+        mat<list[list[tuple[int, int, int]]]>: The height * width matrix
+        where each element is a tuple representing the color of a pixel via
+        RGB code in a tuple `(r, g, b)`.
+        """
 
-    # clock ticker
-    pygame.display.update()
-    clock.tick(speed)
+        # Make a blank width * height matrix.
+        mat = []
+        for _ in range(self.height):
+            mat.append([Color(0, 0, 0) for _ in range(self.width)])
+
+        # Update matrix with Food and Snake positions.
+        mat[self.food.position.y][self.food.position.x] = self.food.color
+        for curr in self.snake.positions:
+            mat[curr.y][curr.x] = self.snake.color
+
+        return mat

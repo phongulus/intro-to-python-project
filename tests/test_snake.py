@@ -171,7 +171,7 @@ class SnakeTestCase(TestCase):
         Check that the reset function correctly resets the Snake length,
         position and direction to default values.
         """
-        
+
         s = Snake(8, 8)
         s.length = 12
         s.direction = Direction.DOWN

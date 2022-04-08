@@ -3,6 +3,7 @@ from collections import deque
 from model.util import Point, Color
 from model.food import Food
 
+
 class FoodTestCase(TestCase):
 
     def test_food_init(self):
@@ -17,7 +18,8 @@ class FoodTestCase(TestCase):
         assert type(f.all_points) == set
         assert f.color == Color(255, 0, 0)
         assert f.position == Point(1, 1)
-        assert len(f.all_points - \
+        assert len(
+            f.all_points -
             set([Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0)])) == 0
 
     def test_food_move(self):
@@ -37,6 +39,7 @@ class FoodTestCase(TestCase):
             old_pos = f.position
 
         # Check that the food will never be moved to inside the snake.
+        f.position = Point(0, 0)
         assert f.move_random_position(
             deque([Point(0, 0), Point(0, 1), Point(1, 0)])
         )

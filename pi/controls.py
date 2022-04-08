@@ -1,6 +1,6 @@
 import board
-import busio
 from digitalio import DigitalInOut, Direction, Pull
+
 
 # Input pins:
 button_A = DigitalInOut(board.D5)
@@ -31,35 +31,42 @@ button_C = DigitalInOut(board.D4)
 button_C.direction = Direction.INPUT
 button_C.pull = Pull.UP
 
+
 def is_up_pressed():
     if button_U.value:
         return False
     return True
+
 
 def is_down_pressed():
     if button_D.value:
         return False
     return True
 
+
 def is_left_pressed():
     if button_L.value:
         return False
     return True
+
 
 def is_right_pressed():
     if button_R.value:
         return False
     return True
 
+
 def is_center_pressed():
     if button_C.value:
         return False
     return True
 
+
 def is_A_pressed():
     if button_A.value:
         return False
     return True
+
 
 def is_B_pressed():
     if button_B.value:
