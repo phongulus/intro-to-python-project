@@ -33,42 +33,121 @@ button_C.pull = Pull.UP
 
 
 def is_up_pressed():
+    """
+    Checking if the 'up' button is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the 'up' button is pressed and if not False.
+    """
     if button_U.value:
         return False
     return True
 
 
 def is_down_pressed():
+    """
+    Checking if the 'down' button is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the 'down' button is pressed and if not False.
+    """
     if button_D.value:
         return False
     return True
 
 
 def is_left_pressed():
+    """
+    Checking if the 'left' button is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the 'left' button is pressed and if not False.
+    """
     if button_L.value:
         return False
     return True
 
 
 def is_right_pressed():
+    """
+    Checking if the 'right' button is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the 'right' button is pressed and
+    if not False.
+    """
     if button_R.value:
         return False
     return True
 
 
 def is_center_pressed():
+    """
+    Checking if the 'center' button is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the 'center' button is pressed and
+    if not False.
+    """
     if button_C.value:
         return False
     return True
 
 
 def is_A_pressed():
+    """
+    Checking if the button 'A' is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the button 'A' is pressed and if not False.
+    """
     if button_A.value:
         return False
     return True
 
 
 def is_B_pressed():
+    """
+    Checking if the button 'B' is pressed.
+
+    Parameters:
+    ----
+    None
+
+    Return:
+    ----
+    `<Boolean>`: Returns True if the button 'B' is pressed and if not False.
+    """
     if button_B.value:
         return False
     return True
