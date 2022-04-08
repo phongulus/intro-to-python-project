@@ -65,7 +65,7 @@ class Snake:
 
         """
 
-        opposite = new_direction * Point(-1, -1)
+        opposite = Point(-1, -1) * new_direction.value
 
         if self.length == 1 or opposite != self.direction.value:
             self.direction = new_direction
