@@ -37,6 +37,7 @@ class FoodTestCase(TestCase):
             old_pos = f.position
 
         # Check that the food will never be moved to inside the snake.
+        f.position = Point(0, 0)
         assert f.move_random_position(
             deque([Point(0, 0), Point(0, 1), Point(1, 0)])
         )
