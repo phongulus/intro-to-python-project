@@ -38,3 +38,5 @@ Both RPi's must be set up in the following way:
 1. On the receiver RPi, run `receive.py` with `sudo python receive.py`. The `sudo` is required!
 2. On the controller RPi, run `snake_demo.py` with `python snake_demo.py`.
 3. Enjoy!
+
+The tests can be run by running `pytest` from the root project directory.
